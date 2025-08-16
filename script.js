@@ -2,45 +2,42 @@ const getUserBtn = document.getElementById('getUserBtn');
 const userInfoDiv = document.getElementById('userInfo');
 const spinner = document.getElementById('spinner');
 
-async function fetchRandomUser() {
+// Fetch multiple users (e.g., 5 users)
+async function fetchRandomUsers() {
     try {
-        // Show spinner and hide user info
         spinner.style.display = 'block';
         userInfoDiv.style.display = 'none';
         userInfoDiv.innerHTML = '';
 
-        const response = await fetch('https://randomuser.me/api/');
+        // Fetch 5 users at once
+        const response = await fetch('https://randomuser.me/api/?results=5');
         const data = await response.json();
-        const user = data.results[0];
+        const users = data.results;
 
-        const profilePicture = user.picture.large;
-        const firstName = user.name.first;
-        const lastName = user.name.last;
-        const email = user.email;
-        const city = user.location.city;
-        const country = user.location.country;
-
-        // Hide spinner
         spinner.style.display = 'none';
-
-        // Show user info inside the box
         userInfoDiv.style.display = 'block';
-        userInfoDiv.innerHTML = `
-            <img src="${profilePicture}" alt="Profile Picture">
-            <div class="fadeIn userText">
-                <strong>First Name:</strong> ${firstName} <br>
-                <strong>Last Name:</strong> ${lastName} <br>
-                <strong>Email:</strong> ${email} <br>
-                <strong>City:</strong> ${city} <br>
-                <strong>Country:</strong> ${country}
+
+        // Build a list of users
+        const usersList = users.map(user => `
+            <div class="fadeIn userText" style="margin-bottom: 30px; border-bottom: 1px dashed #B2DFDB; padding-bottom: 20px;">
+                <img src="${user.picture.large}" alt="Profile Picture" style="width:100px;height:100px;margin-bottom:10px;">
+                <div>
+                    <strong>First Name:</strong> ${user.name.first} <br>
+                    <strong>Last Name:</strong> ${user.name.last} <br>
+                    <strong>Email:</strong> ${user.email} <br>
+                    <strong>City:</strong> ${user.location.city} <br>
+                    <strong>Country:</strong> ${user.location.country}
+                </div>
             </div>
-        `;
+        `).join('');
+
+        userInfoDiv.innerHTML = usersList;
     } catch (error) {
-        console.error("Error fetching user:", error);
+        console.error("Error fetching users:", error);
         spinner.style.display = 'none';
         userInfoDiv.style.display = 'block';
         userInfoDiv.innerHTML = "<span style='color:red;'>Failed to fetch user data.</span>";
     }
 }
 
-getUserBtn.addEventListener('click', fetchRandomUser);
+getUserBtn.addEventListener('click', fetchRandomUsers);
