@@ -1,0 +1,150 @@
+/* ================= Global Styles ================= */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #E0F7FA, #B2EBF2, #C8E6C9, #F1F8E9, #ECEFF1);
+    color: #37474F;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    transition: background 0.5s ease;
+    overflow-y: hidden
+}
+
+/* ================= Heading ================= */
+h1 {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 25px;
+    background: linear-gradient(90deg,#000000);
+    background-clip: text;    
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: textGlow 2s infinite alternate;
+    border-bottom: 4px dotted #B2DFDB;
+    padding-bottom: 10px;
+}
+
+@keyframes textGlow {
+    0% { text-shadow: 0 0 8px #FFFFFF, 0 0 15px #80CBC4; }
+    100% { text-shadow: 0 0 15px #B2DFDB, 0 0 25px #AED581; }
+}
+
+/* ================= Button ================= */
+#getUserBtn {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border: 2px solid #B2DFDB;
+    border-radius: 50px;
+    background: linear-gradient(45deg, #80CBC4, #AED581, #B2DFDB);
+    color: #37474F;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+#getUserBtn:hover {
+    transform: scale(1.05) rotate(-1deg);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    background: linear-gradient(45deg, #B2DFDB, #AED581, #80CBC4);
+    border-color: #80CBC4;
+}
+
+/* ================= Spinner ================= */
+.spinner {
+    border: 6px solid rgba(0, 0, 0, 0.1);
+    border-top: 6px solid #FF4081;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+    display: none;
+    box-shadow: 0 0 20px rgba(255,64,129,0.5);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ================= User Info Container ================= */
+#userInfo {
+    display: none;
+    margin-top: 35px;
+    font-size: 1.1rem;
+    padding: 25px 50px;       /* slightly smaller padding */
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px dashed #AED581;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    max-width: 380px;         /* smaller width */
+    width: 90%;
+}
+
+#userInfo:hover {
+    transform: translateY(-5px) rotate(1deg);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25), 0 0 20px rgba(255,64,129,0.3);
+}
+
+/* ================= Profile Picture ================= */
+#userInfo img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 6px solid #FFFFFF;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    outline: 3px solid #80CBC4;
+}
+
+#userInfo img:hover {
+    transform: rotate(5deg) scale(1.03);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+/* ================= User Text ================= */
+.userText {
+    text-align: left;
+    margin: 0 auto;
+    max-width: 340px;         /* slightly smaller text block */
+}
+
+/* ================= Labels ================= */
+#userInfo strong {
+    color: #37474F;
+    font-size: 1.4rem;
+    /* border-bottom: 1px solid #B2DFDB; */
+    padding-bottom: 2px;
+}
+
+/* ================= Fade-in Animation ================= */
+.fadeIn {
+    animation: fadeIn 0.8s ease-in-out forwards;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+/* ================= Responsive ================= */
+@media (max-width: 600px) {
+    #getUserBtn {
+        width: 80%;
+    }
+    #userInfo {
+        padding: 20px 30px;
+        max-width: 90%;
+    }
+    .userText {
+        max-width: 100%;
+    }
+}
